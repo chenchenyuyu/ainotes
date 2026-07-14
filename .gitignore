@@ -1,0 +1,14 @@
+node_modules/
+.next/
+coverage/
+dist/
+*.tsbuildinfo
+.env
+.env.local
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+data/index.json
+reports/
+node_modules

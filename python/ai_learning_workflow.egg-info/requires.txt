@@ -1,0 +1,9 @@
+langgraph>=0.6
+pydantic>=2.11
+
+[agents]
+openai-agents>=0.2
+
+[dev]
+pytest>=8.4
+ruff>=0.12

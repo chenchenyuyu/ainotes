@@ -1,0 +1,9 @@
+pyproject.toml
+research_agent.py
+research_workflow.py
+ai_learning_workflow.egg-info/PKG-INFO
+ai_learning_workflow.egg-info/SOURCES.txt
+ai_learning_workflow.egg-info/dependency_links.txt
+ai_learning_workflow.egg-info/requires.txt
+ai_learning_workflow.egg-info/top_level.txt
+tests/test_workflow.py

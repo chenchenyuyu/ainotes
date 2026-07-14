@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: ai-learning-workflow
+Version: 0.1.0
+Summary: Python companion labs for the AI Agent learning path
+Requires-Python: >=3.11
+Requires-Dist: langgraph>=0.6
+Requires-Dist: pydantic>=2.11
+Provides-Extra: dev
+Requires-Dist: pytest>=8.4; extra == "dev"
+Requires-Dist: ruff>=0.12; extra == "dev"
+Provides-Extra: agents
+Requires-Dist: openai-agents>=0.2; extra == "agents"

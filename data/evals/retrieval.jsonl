@@ -1,0 +1,50 @@
+{"id":"agent-01","query":"Agent 基础","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-02","query":"Agent loop","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-03","query":"Agent 工具","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-04","query":"Agent 状态","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-05","query":"Agent 评估","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-06","query":"Agent 推理","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-07","query":"Agent 环境","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-08","query":"Agent 动作","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-09","query":"Agent 决策","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-10","query":"Agent 模型","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-11","query":"Agent 结构化输出","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-12","query":"Agent 工具调用","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-13","query":"Agent 最大步数","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-14","query":"Agent 规划","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-15","query":"Agent 反思","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-16","query":"Agent 多智能体","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-17","query":"Agent 工具描述","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-18","query":"Agent 输入校验","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-19","query":"Agent 超时","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-20","query":"Agent 错误处理","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-21","query":"Agent 高风险操作","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-22","query":"Agent 人工批准","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-23","query":"Agent 单智能体","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-24","query":"Agent 可靠性","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"agent-25","query":"Agent 学习顺序","expectedSource":"agent-basics.md","expectedTerms":["Agent"]}
+{"id":"mcp-01","query":"MCP 基础","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-02","query":"MCP host","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-03","query":"MCP client","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-04","query":"MCP server","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-05","query":"MCP tools","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-06","query":"MCP resources","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-07","query":"MCP prompts","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-08","query":"MCP function calling","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-09","query":"MCP 开放协议","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-10","query":"MCP 工具服务","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-11","query":"MCP stdio","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-12","query":"MCP Streamable HTTP","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-13","query":"MCP 认证","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-14","query":"MCP 远程部署","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-15","query":"MCP 不可信输入","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-16","query":"MCP 模型供应商","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-17","query":"MCP 外部工具","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-18","query":"MCP 外部数据","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-19","query":"MCP AI 应用","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-20","query":"MCP 本地服务","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-21","query":"MCP 安全","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-22","query":"MCP 连接方式","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-23","query":"MCP 协议角色","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-24","query":"MCP 和 function calling 区别","expectedSource":"mcp.md","expectedTerms":["MCP"]}
+{"id":"mcp-25","query":"MCP 学习顺序","expectedSource":"mcp.md","expectedTerms":["MCP"]}
