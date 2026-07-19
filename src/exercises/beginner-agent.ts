@@ -13,47 +13,128 @@ import { calculatorTool, runAgent } from "../core/minimal-agent.js";
  * 这里故意不调用真实 LLM。先理解「模型决定调用工具 → 程序执行工具 →
  * 工具结果作为新 observation 返回模型」之后，再接 API，调试会简单很多。
  */
+// export class BeginnerPracticeProvider implements ModelProvider {
+//   async complete(messages: Message[], tools: ToolDefinition[]): Promise<ModelTurn> {
+//     const toolResult = [...messages].reverse().find((message) => message.role === "tool");
+
+//     if (toolResult) {
+//       const observation = JSON.parse(toolResult.content) as {
+//         ok: boolean;
+//         output?: unknown;
+//         error?: string;
+//       };
+//       return observation.ok
+//         ? { type: "final", content: `计算完成，答案是 ${String(observation.output)}。` }
+//         : { type: "final", content: `工具执行失败：${observation.error ?? "未知错误"}` };
+//     }
+
+//     const prompt = messages.find((message) => message.role === "user")?.content ?? "";
+//     const numbers = prompt.match(/-?\d+(?:\.\d+)?/gu)?.map(Number) ?? [];
+//     const calculator = tools.find((tool) => tool.name === "calculate");
+
+//     if (!calculator || numbers.length < 2) {
+//       return { type: "final", content: "请给出两个数字，例如：计算 12 × 7。" };
+//     }
+// // 一次可支持输入多个运算
+//     const operation = prompt.includes("除")
+//       ? "divide"
+//       : prompt.includes("减")
+//         ? "subtract"
+//         : prompt.includes("加")
+//           ? "add"
+//           : prompt.includes("次方") 
+//            ? "power" 
+//            : "multiply";
+         
+//     return {
+//       type: "tool_calls",
+//       calls: [
+//         {
+//           id: "practice-call-1",
+//           name: calculator.name,
+//           arguments: { operation, left: numbers[0], right: numbers[1] },
+//         },
+//       ],
+//     };
+//   }
+// }
+
 export class BeginnerPracticeProvider implements ModelProvider {
   async complete(messages: Message[], tools: ToolDefinition[]): Promise<ModelTurn> {
-    const toolResult = [...messages].reverse().find((message) => message.role === "tool");
+    // 处理所有工具执行结果（若有）
+    const toolMessages = messages.filter((msg) => msg.role === "tool");
+    if (toolMessages.length > 0) {
+      const results: string[] = [];
+      let hasError = false;
+      for (const msg of toolMessages) {
+        try {
+          const observation = JSON.parse(msg.content) as {
+            ok: boolean;
+            output?: unknown;
+            error?: string;
+          };
+          if (observation.ok) {
+            results.push(String(observation.output));
+          } else {
+            results.push(`错误：${observation.error ?? "未知错误"}`);
+            hasError = true;
+          }
+        } catch {
+          results.push("解析结果失败");
+          hasError = true;
+        }
+      }
 
-    if (toolResult) {
-      const observation = JSON.parse(toolResult.content) as {
-        ok: boolean;
-        output?: unknown;
-        error?: string;
-      };
-      return observation.ok
-        ? { type: "final", content: `计算完成，答案是 ${String(observation.output)}。` }
-        : { type: "final", content: `工具执行失败：${observation.error ?? "未知错误"}` };
+      // 汇总输出
+      let content =
+        results.length === 1
+          ? `计算完成，答案是 ${results[0]}。`
+          : `计算完成，结果分别为：${results.join("；")}。`;
+      if (hasError) {
+        content += "（部分计算失败）";
+      }
+      return { type: "final", content };
     }
 
-    const prompt = messages.find((message) => message.role === "user")?.content ?? "";
-    const numbers = prompt.match(/-?\d+(?:\.\d+)?/gu)?.map(Number) ?? [];
+    // 首次调用，解析用户输入
+    const prompt = messages.find((msg) => msg.role === "user")?.content ?? "";
+    // 按常见分隔符拆分多个计算表达式
+    const clauses = prompt.split(/[，,。；;]\s*/).filter((s) => s.trim().length > 0);
+    const expressions = clauses.length > 0 ? clauses : [prompt];
+
     const calculator = tools.find((tool) => tool.name === "calculate");
-
-    if (!calculator || numbers.length < 2) {
-      return { type: "final", content: "请给出两个数字，例如：计算 12 × 7。" };
+    if (!calculator) {
+      return { type: "final", content: "未找到计算工具。" };
     }
 
-    const operation = prompt.includes("除")
-      ? "divide"
-      : prompt.includes("减")
-        ? "subtract"
-        : prompt.includes("加")
-          ? "add"
-          : "multiply";
+    const calls = [];
+    let index = 1;
+    for (const expr of expressions) {
+      const numbers = expr.match(/-?\d+(?:\.\d+)?/gu)?.map(Number) ?? [];
+      if (numbers.length < 2) continue; // 忽略数字不足的表达式
 
-    return {
-      type: "tool_calls",
-      calls: [
-        {
-          id: "practice-call-1",
-          name: calculator.name,
-          arguments: { operation, left: numbers[0], right: numbers[1] },
-        },
-      ],
-    };
+      const operation = expr.includes("除")
+        ? "divide"
+        : expr.includes("减")
+          ? "subtract"
+          : expr.includes("加")
+            ? "add"
+            : expr.includes("次方")
+              ? "power"
+              : "multiply";
+
+      calls.push({
+        id: `practice-call-${index++}`,
+        name: calculator.name,
+        arguments: { operation, left: numbers[0], right: numbers[1] },
+      });
+    }
+
+    if (calls.length === 0) {
+      return { type: "final", content: "请给出有效的计算表达式，例如：计算 12 × 7。" };
+    }
+
+    return { type: "tool_calls", calls };
   }
 }
 

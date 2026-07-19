@@ -97,11 +97,18 @@ flowchart LR
 
 ```bash
 npm run exercise:intermediate -- "MCP 如何连接工具？"
-npm run eval
+# 用同一批 50 条数据比较关键词与本地向量检索
+npm run exercise:intermediate -- --benchmark
+
+# 可选：配置 OPENAI_API_KEY 后，让真实模型只根据检索证据生成摘要
+npm run exercise:intermediate -- "MCP 如何连接工具？" --real-model
+
 npm test -- tests/notes.test.ts tests/exercises.test.ts
 ```
 
-完成标准：每条关键结论都能追溯到真实文件；删除或伪造 source 后，引用校验必须失败。
+默认向量是无 API Key 的 Hash Embedding 教学基线，不代表生产语义模型。完成标准：每条关键结论都能定位到真实文件与行号；删除或伪造 source 后引用校验必须失败；检索升级必须报告通过率、平均/P95 延迟和成本。
+
+当前 50 条基线中，关键词检索通过 50/50，本地 Hash Vector 通过 47/50。这个结果刻意保留：换成“向量”不保证更好，应分析失败用例后再决定是否引入真实 Embedding、混合检索或 Reranker。
 
 ### 高级：实现安全可观测的 Agent Harness
 

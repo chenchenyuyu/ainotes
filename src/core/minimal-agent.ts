@@ -108,7 +108,7 @@ export async function runAgent(
 }
 
 const calculatorSchema = z.object({
-  operation: z.enum(["add", "subtract", "multiply", "divide"]),
+  operation: z.enum(["add", "subtract", "multiply", "divide", "power"]),
   left: z.number().finite(),
   right: z.number().finite(),
 });
@@ -127,6 +127,7 @@ export const calculatorTool: ToolDefinition<typeof calculatorSchema> = {
       subtract: left - right,
       multiply: left * right,
       divide: left / right,
+      power: left ** right,
     }[operation];
   },
 };

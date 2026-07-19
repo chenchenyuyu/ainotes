@@ -64,6 +64,30 @@ describe("minimal agent loop", () => {
     await expect(runAgent(provider, "1 / 0", [calculatorTool])).resolves.toBe("不能除以零。");
   });
 
+  //补齐calculatorTool的power运算的测试
+  it("executes a power operation", async () => {
+    const provider = scriptedProvider([
+      {
+        type: "tool_calls",
+        calls: [
+          {
+            id: "call-1",
+            name: "calculate",
+            arguments: { operation: "power", left: 2, right: 3 },
+          },
+        ],
+      },
+      { type: "final", content: "答案是 8。" },
+    ]);
+    const onEvent = vi.fn();
+    await expect(runAgent(provider, "2 的 3 次方是多少？", [calculatorTool], { onEvent })).resolves.toBe("答案是 8。");
+    expect(onEvent).toHaveBeenCalledWith({
+      type: "tool_end",
+      name: "calculate",
+      output: 8,
+    });
+  });
+
   it("stops runaway agents at the configured step limit", async () => {
     const provider: ModelProvider = {
       async complete() {
