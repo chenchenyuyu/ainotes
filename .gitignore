@@ -10,5 +10,6 @@ __pycache__/
 .pytest_cache/
 *.pyc
 data/index.json
+data/traces/
 reports/
 node_modules

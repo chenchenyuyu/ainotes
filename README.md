@@ -144,7 +144,16 @@ flowchart TD
 
 
 
-权限门禁必须写在模型外部：Prompt 可以提醒模型谨慎，但不能替代程序级授权。练习中的 `publish_report` 是模拟写操作，不会真实发布内容。
+权限门禁必须写在模型外部：Prompt 可以提醒模型谨慎，但不能替代程序级授权。练习中的 `publish_report` / `delete_file` 都是模拟写操作，不会真实发布或删盘。
+
+已完成能力：
+
+- `delete_file` 高风险工具：未 `--approve-delete` 时 `execute` 计数必须为 0；
+- 计划经 Zod `planSchema` 校验，非法步骤直接 `blocked`；
+- 工具 `cost` + 步数/金额双预算；
+- 规则 Reviewer + 可选 LLM Judge + 人工校准样本；
+- `--persist` 写入 `data/traces/*.jsonl`（含 `failureCategory`）；
+- Prompt injection 只记入 `security` 事件，不能改写 `approve*`。
 
 验收：
 
@@ -154,10 +163,18 @@ npm run exercise:advanced -- "研究 Agent 并发布报告"
 
 # 明确批准后才允许执行模拟发布
 npm run exercise:advanced -- "研究 Agent 并发布报告" --approve
+
+# 删除同理：未批准绝不进入 execute
+npm run exercise:advanced -- "研究 Agent 并删除临时文件"
+npm run exercise:advanced -- "研究 Agent 并删除临时文件" --approve-delete
+
+# 持久化 Trace，便于失败分类与回放
+npm run exercise:advanced -- "研究 Agent 并发布报告" --persist
+
 npm test -- tests/exercises.test.ts
 ```
 
-完成标准：未批准时高风险工具永远不会进入 `execute`；每次运行都能看到步骤数、工具调用数、耗时和 Reviewer 分数。
+完成标准：未批准时高风险工具永远不会进入 `execute`；注入话术不能提升权限；每次运行都能看到步骤数、工具调用数、花费、耗时、Reviewer 分数和失败分类。
 
 ## 推荐练习顺序
 
