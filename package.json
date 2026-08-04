@@ -16,7 +16,10 @@
     "mcp": "tsx src/mcp/server.ts",
     "exercise:beginner": "tsx src/exercises/beginner-agent.ts",
     "exercise:intermediate": "tsx src/exercises/intermediate-rag-agent.ts",
-    "exercise:advanced": "tsx src/exercises/advanced-safe-agent.ts"
+    "exercise:advanced": "tsx src/exercises/advanced-safe-agent.ts",
+    "seed:admin": "tsx src/db/bootstrap.ts",
+    "db:push": "drizzle-kit push",
+    "db:bootstrap": "tsx src/db/bootstrap.ts"
   },
   "repository": {
     "type": "git",
@@ -37,7 +40,9 @@
   "homepage": "https://github.com/chenchenyuyu/ainotes#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
+    "@neondatabase/serverless": "^1.1.0",
     "@openai/agents": "^0.13.3",
+    "drizzle-orm": "^0.45.2",
     "next": "^16.2.10",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
@@ -48,6 +53,8 @@
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
+    "dotenv": "^17.4.2",
+    "drizzle-kit": "^0.31.10",
     "tsx": "^4.23.1",
     "typescript": "^6.0.0",
     "vitest": "^4.1.10"

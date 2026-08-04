@@ -11,5 +11,9 @@ __pycache__/
 *.pyc
 data/index.json
 data/traces/
+data/users/
+data/interview-questions/
+data/community/
+data/stats/
 reports/
 node_modules

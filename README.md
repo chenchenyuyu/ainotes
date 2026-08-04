@@ -2,12 +2,18 @@
 
 Agent 工程路线：从概念与最小 Agent Loop，逐步学习 RAG、Harness、Skills、MCP、多 Agent、Browser Agent、评估、安全与真实产品交付。
 
-学习控制台分为初级、中级、高级，共 9 个阶段。每阶段提供精读资料、阅读目标、可勾选实践、验收问题和评分；进度保存在浏览器本地。核心代码保持小而可测试，真实模型调用通过 `OPENAI_API_KEY` 启用；单元测试和检索评估不需要 API Key。
+学习控制台分为初级、中级、高级，共 9 个阶段。每阶段提供精读资料、阅读目标、可勾选实践、验收问题和评分。可注册/登录账号，把进度、答案与个人学习文档保存到 **Neon Postgres**；登录后可生成综合打分、缺口分析与今后学习建议的总报告。控制台采用页签模式：发展史、学习路线、行业热点、招聘市场、面试题、讨论问答。面试题支持学员投稿与管理员上传，按热点分汇总排序。系统会自动创建管理员账号（默认 `admin` / `admin123456`，可用 `ADMIN_USERNAME` / `ADMIN_PASSWORD` 配置），管理员可在控制台管理登录用户。未登录时进度仍保存在浏览器本地。核心代码保持小而可测试，真实模型调用通过 `OPENAI_API_KEY` 启用；单元测试和检索评估不需要 API Key。
+
+部署到 `ai.cychenyu.com`（Neon + Vercel）见 [docs/DEPLOY-NEON.md](docs/DEPLOY-NEON.md)。
 
 ## 从这里开始
 
 ```bash
+cp .env.example .env.local
+# 填入 Neon DATABASE_URL 后：
 npm install
+npm run db:push
+npm run db:bootstrap
 npm run exercise:beginner -- "计算 12 乘以 7"
 npm run exercise:intermediate -- "Agent loop 是什么？"
 npm run exercise:advanced -- "研究 Agent 并发布报告"
